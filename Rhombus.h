@@ -8,6 +8,7 @@
 class Rhombus: public Shape{
 
 private:
+    int d; //if d is odd d=d else d= d+1 (make sure construction is done right!)
 
 
 

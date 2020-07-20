@@ -8,6 +8,8 @@
 class Triangle: public Shape{
 
 private:
+    int h;
+    int b;
 
 
 
