@@ -1,7 +1,7 @@
 //Emilia Segura, 40138440
 
-#ifndef TRIANGLE.H
-#define TRIANGLE.H
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
 
 #include "Shape.h"
 

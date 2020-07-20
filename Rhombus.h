@@ -1,7 +1,7 @@
 //Emilia Segura, 40138440
 
-#ifndef RHOMBUS.H
-#define RHOMBUS.H
+#ifndef RHOMBUS_H
+#define RHOMBUS_H
 
 #include "Shape.h"
 

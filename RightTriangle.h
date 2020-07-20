@@ -1,7 +1,7 @@
 //Emilia Segura, 40138440
 
-#ifndef RIGHTTRIANGLE.H
-#define RIGHTTRIANGLE.H
+#ifndef RIGHTTRIANGLE_H
+#define RIGHTTRIANGLE_H
 
 #include "Shape.h" //is this needed?
 #include "Triangle.h"

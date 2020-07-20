@@ -1,15 +1,19 @@
 //Emilia Segura, 40138440
 
-#ifndef SHAPE.H
-#define SHAPE.H
+#ifndef SHAPE_H
+#define SHAPE_H
 
 #include <string>
+#include <vector>
+#include <iostream>
+
+//using Grid = vector<vector<char>>;  see 7.2, 7.3 in instructions....
 
 
 class Shape{
 
 private:
-    int id; //figure out what to do with this
+    const int id; //figure out what to do with this
     std::string name;
     std::string description;
 
@@ -17,27 +21,34 @@ private:
 
 
 public:
-    Shape(std::string& name, std::string& description); //Constructor
-    virtual ~Shape(); //destructor
+    Shape(const std::string& name, const std::string& description); //Constructor
+    virtual ~Shape() = default; //destructor for now default, maybe change if needed!
 
+    //getters
     int getId() const;
     std::string getName() const;
     std::string getDescription() const;
 
+    //setters
     void setName(std::string& name);
     void setDescription(std::string& description);
 
-    std::string toString();
+    std::string toString() const; //only need to implement here in base class I think
 
-//ARE THESE SUPPOSE TO BE VIRTUAL??? WHAT GOES IN BASE VS DERIVED CLASSES
-    double area(); //check return types
-    double perimeter();
-    int screenArea();
-    int screenPerimeter();
-    void draw();
-    int boxHeight();
-    int boxWidth();
+    //pure virutal functions, only implemented in derived classes
+    virtual double area() const = 0; //check return types
+    virtual double perimeter() const= 0;
+    virtual int screenArea() const= 0;
+    virtual int screenPerimeter() const = 0;
+    virtual int boxHeight() const = 0;
+    virtual int boxWidth() const = 0;
+
+   // will need to figure this out!
+  //  virtual Grid draw(char fChar = ’*’, char bChar = ’ ’) const = 0;  see 7.2, 7.3 in instructions....
 
 };
+
+
+  std::ostream& operator<< (std::ostream& out, const Shape& shape);
 
 #endif

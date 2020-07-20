@@ -1,8 +1,8 @@
 //Emilia Segura, 40138440
 
 
-#ifndef RECTANGLE.H
-#define RECTANGLE.H
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
 #include <string>
 #include "Shape.h"
@@ -16,23 +16,22 @@ private:
 
 
 public:
-    Rectangle(int& h, int& w, std::string name ="Rectangle", std::string description = "Four right angles"); //constructor
-    virtual ~Rectangle(); //destructor
+    Rectangle(int h, int w, const std::string name ="Rectangle", const std::string description = "Four right angles"); //constructor
+    virtual ~Rectangle() = default; //destructor
 
 
     
 
 //ARE THESE SUPPOSE TO BE VIRTUAL??? WHAT GOES IN BASE VS DERIVED CLASSES
-    std::string toString();
-    double area(); //check return types
-    double perimeter();
-    int screenArea();
-    int screenPerimeter();
+  //  std::string toString();
+    double area() const; //check return types
+    double perimeter() const;
+    int screenArea() const;
+    int screenPerimeter() const;
+    int boxHeight() const;
+    int boxWidth() const;
+
     void draw();
-    int boxHeight();
-    int boxWidth();
-
-
 };
 
 #endif

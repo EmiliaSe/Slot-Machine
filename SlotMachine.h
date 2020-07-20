@@ -1,8 +1,8 @@
 //Emilia Segura, 40138440
 #include <array>
 
-#ifndef SLOTMACHINE.H
-#define SLOTMACHINE.H
+#ifndef SLOTMACHINE_H
+#define SLOTMACHINE_H
 
 //copied from p.22 of assignment
 class SlotMachine
