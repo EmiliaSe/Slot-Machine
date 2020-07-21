@@ -14,6 +14,14 @@ private:
 
 public:
 
+    RightTriangle(int b, const std::string& name = "Ladder", const std::string& description = "One right and two acute angles");
+    virtual ~RightTriangle() = default;
+    double perimeter() const;
+    int screenArea() const;
+    int screenPerimeter() const;
+    int boxHeight() const;
+    int boxWidth() const;
+
 
 };
 
