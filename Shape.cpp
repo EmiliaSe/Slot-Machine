@@ -17,7 +17,7 @@ int Shape::counter{0};
 //constructor
 Shape::Shape(const std::string& name, const std::string& description) 
     : name{name}, description{description}, id{++counter}{ //using a static counter variable to increment ids
-std::cout << "A Shape has been created" << std::endl;
+//std::cout << "A Shape has been created" << std::endl; //for testing
 }
 
 
@@ -66,3 +66,14 @@ string Shape::toString() const{
       out << shape.toString();
       return out;
   }
+
+ostream& operator<< (ostream& out, const Grid& g){
+
+for ( const auto &row : g ){ //for each row
+   for ( const auto &c : row ) { //for each char in the row
+       out << c; //add char to stream
+   }
+   out << endl; //new line after each row
+}
+return out;
+}

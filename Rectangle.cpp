@@ -1,6 +1,7 @@
 //Emilia Segura, 40138440
 
 #include <string>
+#include <vector>
 
 #include "Shape.h"
 #include "Rectangle.h" //also need to include shape?
@@ -8,14 +9,13 @@
 using std::string;
 using std::cout;
 using std::endl;
+using std::vector;
 
 
 //constructor
-Rectangle::Rectangle(int h, int w,const string name, const string description): Shape(name, description), h{h}, w{w} {
-    cout << "A rectangle has been created" <<endl; //for testing
+Rectangle::Rectangle(int w, int h,const string name, const string description): Shape(name, description), h{h}, w{w} {
+  //  cout << "A rectangle has been created" <<endl; //for testing
 }
-
-
 
 double Rectangle::area() const{
     return double(h)*w;
@@ -39,3 +39,9 @@ int Rectangle::boxWidth() const{
     return w;
 }
 
+
+Grid Rectangle::draw(char fChar, char bChar) const{
+
+   vector<vector<char>> temp(h,vector<char>(w, fChar)); //create 2D vector with right dimensions and fill completeley with foreground character
+   return temp;
+}
