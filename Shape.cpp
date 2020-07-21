@@ -40,6 +40,7 @@ void Shape::setDescription(std::string& description){
 }
 
 
+//add formatting to print int vs double area/perimeter nicely
 string Shape::toString() const{
    std::ostringstream s;
    s << "Shape Information\n-----------------\n";

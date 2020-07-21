@@ -2,7 +2,6 @@
 
 #include <string>
 
-
 #include "Shape.h"
 #include "Rectangle.h" //also need to include shape?
 
@@ -19,11 +18,11 @@ Rectangle::Rectangle(int h, int w,const string name, const string description): 
 
 
 double Rectangle::area() const{
-    return h*w;
+    return double(h)*w;
 
 } //check return types
 double Rectangle::perimeter() const{
-    return 2*(h+w);
+    return 2.0*(h+w);
 }
 int Rectangle::screenArea() const{
         return area();

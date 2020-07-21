@@ -19,11 +19,6 @@ public:
     Rectangle(int h, int w, const std::string name ="Rectangle", const std::string description = "Four right angles"); //constructor
     virtual ~Rectangle() = default; //destructor
 
-
-    
-
-//ARE THESE SUPPOSE TO BE VIRTUAL??? WHAT GOES IN BASE VS DERIVED CLASSES
-  //  std::string toString();
     double area() const; //check return types
     double perimeter() const;
     int screenArea() const;
@@ -31,7 +26,7 @@ public:
     int boxHeight() const;
     int boxWidth() const;
 
-    void draw();
+   // void draw(); figure this out!
 };
 
 #endif
