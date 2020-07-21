@@ -24,7 +24,7 @@ public:
     int boxHeight() const;
     int boxWidth() const;
 
-   // void draw(); figure this out!
+   Grid draw(char fChar = '*', char bChar = ' ') const;
 
 
 };

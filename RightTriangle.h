@@ -19,8 +19,9 @@ public:
     double perimeter() const;
     int screenArea() const;
     int screenPerimeter() const;
-    int boxHeight() const;
-    int boxWidth() const;
+
+    Grid draw(char fChar = '*', char bChar = ' ') const;
+
 
 
 };

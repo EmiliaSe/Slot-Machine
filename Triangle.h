@@ -23,6 +23,11 @@ public:
     int getHeightTriangle() const;
     double area() const;
 
+    int boxHeight() const;
+    int boxWidth() const;
+
+    
+
 
 };
 

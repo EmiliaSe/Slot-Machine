@@ -2,12 +2,14 @@
 
 #include <string>
 #include <cmath>
+#include <vector>
 
 #include "Shape.h"
 #include "Triangle.h"
 #include "AcuteTriangle.h"
 
 using std::string;
+using std::vector;
 
 
 //constructor
@@ -29,9 +31,28 @@ int AcuteTriangle::screenArea() const{
 int AcuteTriangle::screenPerimeter() const{
     return 4*(getHeightTriangle()-1);
 }
-int AcuteTriangle::boxHeight() const{
-    return getHeightTriangle();
-}
-int AcuteTriangle::boxWidth() const{
-    return getBaseTriangle();
+
+
+Grid AcuteTriangle::draw(char fChar, char bChar) const{
+    int base = boxWidth();
+    int height = boxHeight();
+    
+    
+    Grid temp;
+
+    for (int i=1; i <= height ; ++i){ //outer loop going row by row
+        
+        vector<char> row;
+        for (int j=i; j < height; ++j){ //fill the left backgroud
+            row.push_back(bChar); 
+        }
+        for (int k=1; k <=(2*i-1); ++k){ //fill foreground
+            row.push_back(fChar);
+        }
+        for (int l=i; l < height; ++l){ //fill the right backgroud
+            row.push_back(bChar); 
+        }
+        temp.push_back(row);
+    }
+   return temp;
 }
