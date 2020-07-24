@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <algorithm>
 
 #include "SlotMachine.h"
 #include "Rectangle.h"
@@ -46,18 +47,24 @@ return bet;
 }
 
 void SlotMachine::make_shapes(){
-    for (int k=0; k<3; k++){
-        make_shape(k);
-    }
+   for (int k=0; k<3; k++){
+       make_shape(k);
+   }
 
 } // Step 6-19
 
 
 void SlotMachine::make_shape(int k){
+    
     //generate random n between 0 and 3
     //genereate random w between 1 and 25
+    
     int n = generateRandom(0,3);
     int w = generateRandom(1,25);
+
+    // cout << "Shape # " << k <<endl;
+    // cout << "random n is " << n <<endl;
+    // cout << "random w is  " << w <<endl;
 
     switch (n){
         case 0: //rhombus
@@ -72,18 +79,62 @@ void SlotMachine::make_shape(int k){
             reel[k].reset(new RightTriangle(w));
             break;
 
-        case 3: //or default? rectangle
-            int h = generateRandom(1,25); //randomly genereate height between 1 and 25
+        case 3: //rectangle
+            int h = generateRandom(1,25); //randomly generate height between 1 and 25
             reel[k].reset(new Rectangle(w,h));
             break;
     }
 
 } // Steps 7-18
 
-int generateRandom(int lower, int upper) {
-    return lower + ( rand() % ( upper - lower + 1 ));  //restricts the random number to the desired range
+int SlotMachine::generateRandom(int lower, int upper) {
+    return lower + ( rand() % ( upper - lower + 1 ));  //restricts the random number to the desired range, is the pseudorandom enough?
 }
 
+void SlotMachine::printReel(){
+    int w0 = reel[0]->boxWidth();
+    int w1 = reel[1]->boxWidth();
+    int w2 = reel[2]->boxWidth();
+
+    int h0 = reel[0]->boxHeight();
+    int h1 = reel[1]->boxHeight();
+    int h2 = reel[2]->boxHeight();
+
+    Grid box_0 = reel[0]->draw(); 
+    Grid box_1 = reel[1]->draw();
+    Grid box_2 = reel[2]->draw();
+
+    int height = std::max({h0, h1,h2});
+
+    //top row (bottom row should be the same)
+    cout << '+' << std::string((w0+2), '-') << '+' << std::string((w1+2), '-') << '+' << std::string((w2+2), '-') << '+' << endl; 
+
+    for (int i =0; i< height; ++i){ //outer loop (going row by row)
+        cout << "| ";
+        //loop for grid 0
+        printRow(i,h0,w0,box_0);
+        cout << " | ";
+        //loop for grid 1
+        printRow(i,h1,w1,box_1);
+        cout << " | ";
+        //loop for grid 2
+        printRow(i,h2,w2,box_2);
+        cout << " |" << '\n';
+    }
+    //bottom row
+    cout << '+' << std::string((w0+2), '-') << '+' << std::string((w1+2), '-') << '+' << std::string((w2+2), '-') << '+' << endl; 
+}
+
+void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid& box){ //helper for printReel. goes through a row of the grid
+    for (int j=0; j<w; ++j){
+            if (i<h){
+            cout << box[i][j];
+            }
+            else { //when the shape is smaller than total height of reel, blank spaces are printed
+                cout << ' ';
+            }
+        }
+}
 
 
 
@@ -100,10 +151,24 @@ void SlotMachine::run(){
         make_shapes(); //steps 6-19
 
         //step 20, print three reel shapes side by side
+        //temporary solution just to test
+        Grid box_0 = reel[0]->draw(); 
+        Grid box_1 = reel[1]->draw();
+        Grid box_2 = reel[2]->draw();
+
+        cout << box_0 << endl;
+        cout << box_1 << endl;
+        cout << box_2 << endl;
+
+        printReel();
         //step 21 compute token win or loss
         //step 22 update current tokens
         //display message (call function display())
         //if player chooses to quit by entering 0 as bet figure out how that exits loop and says bye
+
+        //temp for testing asking user for nbr tokens
+        cout << "Enter how many tokens you have left " ;
+        cin >> t;
     }
 //display goodbye no more tokens
 

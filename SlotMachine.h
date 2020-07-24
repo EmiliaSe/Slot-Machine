@@ -9,7 +9,7 @@
 class SlotMachine
 {
 private: //private was added be me, 
-    std::array<std::unique_ptr<Shape>, 3> reel{}; //uncommment once Shape is implemented
+    std::array<std::unique_ptr<Shape>, 3> reel{}; 
     void make_shapes(); // Step 6-19
     void make_shape(int k); // Steps 7-18
     void display(); // Step 23
@@ -19,6 +19,8 @@ private: //private was added be me,
     void welcome(); //display initial welcome message
     int prompt(); //read bet
     int generateRandom(int lower, int upper); //generate a random int in range bounded by lower and upper
+    void printReel(); 
+    void printRow(const int& i, const int& h, const int& w, const Grid& box); 
 
 public:
     SlotMachine() = default;
