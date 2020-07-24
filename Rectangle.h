@@ -14,7 +14,7 @@ private:
     int w; //rectangle width
 
 public:
-    Rectangle(int h, int w, const std::string name ="Rectangle", const std::string description = "Four right angles"); //constructor
+    Rectangle(int w, int h, const std::string name ="Rectangle", const std::string description = "Four right angles"); //constructor
     virtual ~Rectangle() = default; //destructor
 
 //all implemented here in dereived class. All const since they should not modify the object

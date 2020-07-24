@@ -8,7 +8,7 @@
 #include <iostream>
 
 
-using Grid = std::vector<std::vector<char>>; // see 7.2, 7.3 in instructions.... not sure this is right!!
+using Grid = std::vector<std::vector<char>>; 
 
 class Shape{
 
