@@ -12,10 +12,8 @@ using Grid = std::vector<std::vector<char>>; // see 7.2, 7.3 in instructions....
 
 class Shape{
 
-
-
 private:
-    const int id; //figure out what to do with this
+    const int id; 
     std::string name;
     std::string description;
 
@@ -23,7 +21,6 @@ private:
 
 
 public:
-
 
     Shape(const std::string& name, const std::string& description); //Constructor
     virtual ~Shape() = default; //destructor for now default, maybe change if needed!
@@ -37,7 +34,7 @@ public:
     void setName(std::string& name);
     void setDescription(std::string& description);
 
-    std::string toString() const; //only need to implement here in base class I think
+    std::string toString() const; //shared by all shapes, so implemented in base class
 
     //pure virutal functions, only implemented in derived classes
     virtual double area() const = 0; //check return types
@@ -46,17 +43,12 @@ public:
     virtual int screenPerimeter() const = 0;
     virtual int boxHeight() const = 0;
     virtual int boxWidth() const = 0;
-
-   // will need to figure this out!
-    virtual Grid draw(char fChar = '*', char bChar = ' ') const = 0; // see 7.2, 7.3 in instructions....
+    virtual Grid draw(char fChar = '*', char bChar = ' ') const = 0; 
 
 };
-
-
+// << overloads are the same for all shapes.
   std::ostream& operator<< (std::ostream& out, const Shape& shape); //overload to print shape information
 
   std::ostream& operator<< (std::ostream& out, const Grid& g); //overload to print drawing of shape
-
- 
 
 #endif

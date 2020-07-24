@@ -8,16 +8,15 @@
 class Rhombus: public Shape{
 
 private:
-    int d; //if d is odd d=d else d= d+1 (make sure construction is done right!)
-
-
+    int d; 
 
 public:
 
     Rhombus(int d, const std::string name ="Diamond", const std::string description = "Parallelogram with equal sides"); //constructor
     virtual ~Rhombus() = default; //destructor
 
-    double area() const; //check return types
+//all implemented here in derived class
+    double area() const; 
     double perimeter() const;
     int screenArea() const;
     int screenPerimeter() const;

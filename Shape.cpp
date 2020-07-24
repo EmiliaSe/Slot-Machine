@@ -40,7 +40,7 @@ void Shape::setDescription(std::string& description){
 }
 
 
-//add formatting to print int vs double area/perimeter nicelyi
+//uses a string stream to nicely construct two formatted columns of output
 string Shape::toString() const{
    std::ostringstream s;
    s << "Shape Information\n-----------------\n";
@@ -50,17 +50,14 @@ string Shape::toString() const{
    s << std::left <<std::setw(15)<< "B. box width:" << boxWidth() <<endl;
    s << std::left <<std::setw(15)<< "B. box height:" << boxHeight() <<endl;
    s << std::left <<std::setw(15)<< "Scr area" <<  screenArea() <<endl;
-   s << std::left <<std::setw(15)<< "Geo area:" << std::fixed << std::setprecision(2)<< area() <<endl;
+   s << std::left <<std::setw(15)<< "Geo area:" << std::fixed << std::setprecision(2)<< area() <<endl; //fixed and set precison to print decimal number nicely
    s << std::left <<std::setw(15)<< "Scr perimeter:" << screenPerimeter() <<endl;
    s << std::left <<std::setw(15)<< "Geo perimeter:" << std::fixed << std::setprecision(2)<< perimeter() <<endl;
    s << std::left <<std::setw(15)<< "Static type:" << typeid(this).name() <<endl;
    s << std::left <<std::setw(15)<< "Dynamic type:" << typeid(*this).name() <<endl;
    
-   
-   return s.str();
+   return s.str(); //return the string stream as a single string
 }
-
-
 
   ostream& operator<< (ostream& out, const Shape& shape){
       out << shape.toString();
@@ -68,12 +65,11 @@ string Shape::toString() const{
   }
 
 ostream& operator<< (ostream& out, const Grid& g){
-
-for ( const auto &row : g ){ //for each row
-   for ( const auto &c : row ) { //for each char in the row
-       out << c; //add char to stream
-   }
-   out << endl; //new line after each row
-}
-return out;
+    for ( const auto &row : g ){ //for each row
+        for ( const auto &c : row ) { //for each char in the row
+            out << c; //add char to stream
+        }
+    out << '\n'; //new line after each row
+    }
+    return out;
 }

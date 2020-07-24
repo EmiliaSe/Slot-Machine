@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Shape.h"
-#include "Rectangle.h" //also need to include shape?
+#include "Rectangle.h" 
 
 using std::string;
 using std::cout;
@@ -12,7 +12,7 @@ using std::endl;
 using std::vector;
 
 
-//constructor
+//constructor. Forwards name and description to the Shape constructor
 Rectangle::Rectangle(int w, int h,const string name, const string description): Shape(name, description), h{h}, w{w} {
   //  cout << "A rectangle has been created" <<endl; //for testing
 }
@@ -20,7 +20,7 @@ Rectangle::Rectangle(int w, int h,const string name, const string description): 
 double Rectangle::area() const{
     return double(h)*w;
 
-} //check return types
+} 
 double Rectangle::perimeter() const{
     return 2.0*(h+w);
 }

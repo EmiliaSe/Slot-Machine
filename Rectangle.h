@@ -10,16 +10,15 @@
 class Rectangle: public Shape{
 
 private:
-    int h;
-    int w;
-
-
+    int h; //rectangle height
+    int w; //rectangle width
 
 public:
     Rectangle(int h, int w, const std::string name ="Rectangle", const std::string description = "Four right angles"); //constructor
     virtual ~Rectangle() = default; //destructor
 
-    double area() const; //check return types
+//all implemented here in dereived class. All const since they should not modify the object
+    double area() const; 
     double perimeter() const;
     int screenArea() const;
     int screenPerimeter() const;

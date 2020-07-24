@@ -9,24 +9,20 @@
 class Triangle: public Shape{
 
 private:
-    int h;
+    int h; //height and base are commun data members to both acute and right triangles
     int b;
-
-
 
 public:
 
     Triangle(int b, int h, const std::string& name, const std::string& description);
-    virtual ~Triangle() = default; //will this need to be changed?
+    virtual ~Triangle() = default;
 
-    int getBaseTriangle() const;
-    int getHeightTriangle() const;
     double area() const;
 
-    int boxHeight() const;
+    int boxHeight() const; //these are equivalent to the height and base of both types of triangles
     int boxWidth() const;
 
-    
+    //other functions are left to the derived classes AcuteTriangle and RightTriangle as they are different for each triangle
 
 
 };
