@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <algorithm>
+#include <typeinfo>
 
 #include "SlotMachine.h"
 #include "Rectangle.h"
@@ -136,6 +137,46 @@ void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid&
         }
 }
 
+int SlotMachine::betResult(int bet){
+    //dynamic types of each Shape. I think I can get rid of this!
+    // const std::type_info& t0 = typeid(*reel[0]);
+    // const std::type_info& t1 = typeid(*reel[1]);
+    // const std::type_info& t2 = typeid(*reel[2]);
+    
+    //names of each shape
+    std::string n0= reel[0]->getName();
+    std::string n1= reel[1]->getName();
+    std::string n2= reel[2]->getName();
+
+    //screen areas of each shape
+    int a0 = reel[0]->screenArea();
+    int a1 = reel[1]->screenArea();
+    int a2 = reel[2]->screenArea();
+
+    //add a print statement with the names and dimensions of each shape!
+
+    if (((n0==n1)|| (n0==n2) ||(n1==n2)) && ((a0==a1)|| (a0==a2) ||(a1==a2)) ) { //case 3X bet
+        cout << "Congratulations you win 3X your bet :" << 3*bet <<endl;
+        return 3*bet;
+        }
+    else if (n0==n1 && n0==n2){ //case 2X bet
+        cout << "Congratulations you win 2X your bet :" << 2*bet <<endl;
+        return 2*bet;
+    } 
+    else if (a1 > (a0+a2)) { //case 1X bet
+        cout << "Congratulations you win 1X your bet :" << bet <<endl;
+        return bet;
+        } 
+    else if (n0 == n2) { //case 0x bet
+        cout << "You don’t win, you don’t lose, your are safe!" <<endl;
+        return 0;
+        }
+    else { //-1 bet
+        cout << "You lose your bet" << endl;
+        return -bet;
+    }
+}
+
 
 
 void SlotMachine::run(){
@@ -149,19 +190,10 @@ void SlotMachine::run(){
     while (t>0){ //step 4
         int bet{prompt()}; //step 5
         make_shapes(); //steps 6-19
-
-        //step 20, print three reel shapes side by side
-        //temporary solution just to test
-        Grid box_0 = reel[0]->draw(); 
-        Grid box_1 = reel[1]->draw();
-        Grid box_2 = reel[2]->draw();
-
-        cout << box_0 << endl;
-        cout << box_1 << endl;
-        cout << box_2 << endl;
-
-        printReel();
+        printReel(); //step 20
         //step 21 compute token win or loss
+        int result = betResult(bet);
+        
         //step 22 update current tokens
         //display message (call function display())
         //if player chooses to quit by entering 0 as bet figure out how that exits loop and says bye

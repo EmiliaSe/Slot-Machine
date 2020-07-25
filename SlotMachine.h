@@ -22,6 +22,8 @@ private: //private was added be me,
     void printReel(); 
     void printRow(const int& i, const int& h, const int& w, const Grid& box); 
 
+    int betResult(int bet);
+
 public:
     SlotMachine() = default;
     SlotMachine(const SlotMachine&) = delete; // copy ctor 
