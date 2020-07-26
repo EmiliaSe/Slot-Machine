@@ -40,7 +40,7 @@ cin >> bet;
 while(! cin || bet > this->t){ //while not an int or int too big
     cin.clear(); //reset cin to a good state
     std::getline(cin, bad_data);
-    cout << "please enter a integer smaller or equal to " << t << endl;
+    cout << "please enter a bet smaller or equal to " << t << endl;
     cin >> bet;
 }
 std::getline(cin, bad_data);
@@ -124,6 +124,9 @@ void SlotMachine::printReel(){
     }
     //bottom row
     cout << '+' << std::string((w0+2), '-') << '+' << std::string((w1+2), '-') << '+' << std::string((w2+2), '-') << '+' << endl; 
+    cout << "(" <<reel[0]->getName() <<", " << h0 <<", "<< w0 <<") ";
+    cout << "(" <<reel[1]->getName() <<", " << h1 <<", "<< w1 <<") ";
+    cout << "(" <<reel[2]->getName() <<", " << h2 <<", "<< w2 <<")"<<endl;
 }
 
 void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid& box){ //helper for printReel. goes through a row of the grid
@@ -137,12 +140,7 @@ void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid&
         }
 }
 
-int SlotMachine::betResult(int bet){
-    //dynamic types of each Shape. I think I can get rid of this!
-    // const std::type_info& t0 = typeid(*reel[0]);
-    // const std::type_info& t1 = typeid(*reel[1]);
-    // const std::type_info& t2 = typeid(*reel[2]);
-    
+int SlotMachine::display(int bet){
     //names of each shape
     std::string n0= reel[0]->getName();
     std::string n1= reel[1]->getName();
@@ -154,25 +152,30 @@ int SlotMachine::betResult(int bet){
     int a2 = reel[2]->screenArea();
 
     //add a print statement with the names and dimensions of each shape!
+    
 
     if (((n0==n1)|| (n0==n2) ||(n1==n2)) && ((a0==a1)|| (a0==a2) ||(a1==a2)) ) { //case 3X bet
+        cout << "Jackpot! 2 Similar Shapes AND 2 Equal Screen Areas\n";
         cout << "Congratulations you win 3X your bet :" << 3*bet <<endl;
         return 3*bet;
         }
     else if (n0==n1 && n0==n2){ //case 2X bet
+        cout <<"Three similar shapes\n";
         cout << "Congratulations you win 2X your bet :" << 2*bet <<endl;
         return 2*bet;
     } 
     else if (a1 > (a0+a2)) { //case 1X bet
+        cout << "Middle > Left + Right, in Screen Areas\n";
         cout << "Congratulations you win 1X your bet :" << bet <<endl;
         return bet;
         } 
     else if (n0 == n2) { //case 0x bet
+        cout << "Lucky this time!\n";
         cout << "You don’t win, you don’t lose, your are safe!" <<endl;
         return 0;
         }
     else { //-1 bet
-        cout << "You lose your bet" << endl;
+        cout <<"Oh No!\nYou lose your bet" << endl;
         return -bet;
     }
 }
@@ -184,24 +187,23 @@ void SlotMachine::run(){
     welcome();
     t = 10;  //not currently necessary, but here as reminder to modify if user chooses a different number
 
-    //step 3 Prepare an array reel of three elements to represent the three reels of the slot machine. Each array element is a smart pointer to a Shape object
-    //reel already declared as member variable, not sure I need to do anything here
-
     while (t>0){ //step 4
         int bet{prompt()}; //step 5
+            if (bet==0){
+                cout << "Thanks for playing, come back soon! \n";
+                cout << "Be sure you cash your remaining " << t << " tokens at the bar! \n"; 
+                cout << "Game over." << endl;
+                break; //quit the game if player bets 0
+            }
         make_shapes(); //steps 6-19
         printReel(); //step 20
         //step 21 compute token win or loss
-        int result = betResult(bet);
-        
-        //step 22 update current tokens
-        //display message (call function display())
-        //if player chooses to quit by entering 0 as bet figure out how that exits loop and says bye
-
-        //temp for testing asking user for nbr tokens
-        cout << "Enter how many tokens you have left " ;
-        cin >> t;
+        int result = display(bet); //this line covers steps 21 and 23 (the order makes no difference in game play. the player just sees the bet result before the current tokesn are updated)
+        t +=result; //step 22 update current tokens
+        cout << "You currently have " << t << " tokens" << endl;
+        //display message (call function display()) oops, implemented differently, maybe need to change this!
     }
-//display goodbye no more tokens
+    cout << "You just ran out of tokens. Better luck next time! \n";
+    cout << "Game Over." << endl;
 
 }

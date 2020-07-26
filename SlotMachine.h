@@ -12,7 +12,7 @@ private: //private was added be me,
     std::array<std::unique_ptr<Shape>, 3> reel{}; 
     void make_shapes(); // Step 6-19
     void make_shape(int k); // Steps 7-18
-    void display(); // Step 23
+    int display(int bet); // Step 23 modified from signature given in assignment instructions void display()
 
     //added by me
     int t = 10; //keep track of how many tokens, default is 10
@@ -22,7 +22,7 @@ private: //private was added be me,
     void printReel(); 
     void printRow(const int& i, const int& h, const int& w, const Grid& box); 
 
-    int betResult(int bet);
+    // int betResult(int bet);
 
 public:
     SlotMachine() = default;
