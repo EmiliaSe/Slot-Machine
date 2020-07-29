@@ -18,8 +18,8 @@ using std::endl;
 using std::cin;
 
 
-//potentially modify to take user input to get #of tokens, or at least display right number of tokens.
-void SlotMachine::welcome(){
+
+void SlotMachine::welcome(int t){ //function to display welcome message an initial number of tokens at the start of game
     cout << "Welcome to 3-Reel Lucky Slot Machine Game!\n";
     cout << "Each reel will randomly display one of four shapes, each in 25 sizes.\n";
     cout << "To win 3 x bet, get 2 similar shapes AND 2 shapes with equal Scr Areas\n";
@@ -27,72 +27,63 @@ void SlotMachine::welcome(){
     cout << "To win 1 x bet, get (Middle) Scr Area > (Left + Right) Scr Areas\n";
     cout << "To win or lose nothing, get same Left and Right shapes\n";
     cout << "Otherwise, you lose your bet.\n";
-    cout << "You start with 10 free slot tokens" <<endl;
+    cout << "You start with " << t << " free slot tokens" <<endl;
 
 }
 
 //prompt for user to enter their bet, checks that input is an integer <= available tokens
-int SlotMachine::prompt(){ 
+int SlotMachine::prompt(int t){ 
 std::string bad_data;
 int bet;
 cout << "How much would you like to bet (enter 0 to quit)" << endl;
 cin >> bet;
-while(! cin || bet > this->t){ //while not an int or int too big
+while(! cin || bet > t){ //while not an int or int too big
     cin.clear(); //reset cin to a good state
     std::getline(cin, bad_data);
     cout << "please enter a bet smaller or equal to " << t << endl;
     cin >> bet;
 }
 std::getline(cin, bad_data);
-return bet;
+return bet; //returns a valid bet
 }
 
 void SlotMachine::make_shapes(){
    for (int k=0; k<3; k++){
-       make_shape(k);
+       make_shape(k); //call make shape 3 times
    }
-
 } // Step 6-19
 
 
 void SlotMachine::make_shape(int k){
     
-    //generate random n between 0 and 3
-    //genereate random w between 1 and 25
-    
-    int n = generateRandom(0,3);
-    int w = generateRandom(1,25);
-
-    // cout << "Shape # " << k <<endl;
-    // cout << "random n is " << n <<endl;
-    // cout << "random w is  " << w <<endl;
+    int n = generateRandom(0,3); //generate random n between 0 and 3
+    int w = generateRandom(1,25); //genereate random w between 1 and 25
 
     switch (n){
         case 0: //rhombus
-            reel[k].reset(new Rhombus(w));
+            reel[k].reset(new Rhombus(w)); //smart pointer to Rhombus
             break;
 
         case 1: //acute triangle
-            reel[k].reset(new AcuteTriangle(w));
+            reel[k].reset(new AcuteTriangle(w)); //smart pointer to Acute Triangle
             break;
 
         case 2: //right triangle
-            reel[k].reset(new RightTriangle(w));
+            reel[k].reset(new RightTriangle(w)); //smart pointer to Right Triangle
             break;
 
         case 3: //rectangle
             int h = generateRandom(1,25); //randomly generate height between 1 and 25
-            reel[k].reset(new Rectangle(w,h));
+            reel[k].reset(new Rectangle(w,h)); //smart pointer to Rectangle
             break;
     }
-
 } // Steps 7-18
 
-int SlotMachine::generateRandom(int lower, int upper) {
-    return lower + ( rand() % ( upper - lower + 1 ));  //restricts the random number to the desired range, is the pseudorandom enough?
+int SlotMachine::generateRandom(int lower, int upper) { //generate a random int to be used to create shapes
+    return lower + ( rand() % ( upper - lower + 1 ));  //restricts the random number to the desired range
 }
 
-void SlotMachine::printReel(){
+void SlotMachine::printReel(){  //function to display the three shapes side by side with border as in assignment instructions
     int w0 = reel[0]->boxWidth();
     int w1 = reel[1]->boxWidth();
     int w2 = reel[2]->boxWidth();
@@ -105,9 +96,9 @@ void SlotMachine::printReel(){
     Grid box_1 = reel[1]->draw();
     Grid box_2 = reel[2]->draw();
 
-    int height = std::max({h0, h1,h2});
+    int height = std::max({h0, h1,h2}); //height of tallest object becomes height of reel (smaller objects will just have blank space below)
 
-    //top row (bottom row should be the same)
+    //top row 
     cout << '+' << std::string((w0+2), '-') << '+' << std::string((w1+2), '-') << '+' << std::string((w2+2), '-') << '+' << endl; 
 
     for (int i =0; i< height; ++i){ //outer loop (going row by row)
@@ -124,6 +115,7 @@ void SlotMachine::printReel(){
     }
     //bottom row
     cout << '+' << std::string((w0+2), '-') << '+' << std::string((w1+2), '-') << '+' << std::string((w2+2), '-') << '+' << endl; 
+    //prints names and dimensions of the three shapes
     cout << "(" <<reel[0]->getName() <<", " << h0 <<", "<< w0 <<") ";
     cout << "(" <<reel[1]->getName() <<", " << h1 <<", "<< w1 <<") ";
     cout << "(" <<reel[2]->getName() <<", " << h2 <<", "<< w2 <<")"<<endl;
@@ -140,7 +132,7 @@ void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid&
         }
 }
 
-int SlotMachine::display(int bet){
+int SlotMachine::display(int bet){ //calculates win or loss on a bet and displays appropriate message to user (steps 21 and 23) Returns number of tokents won (negative if loss)
     //names of each shape
     std::string n0= reel[0]->getName();
     std::string n1= reel[1]->getName();
@@ -149,10 +141,7 @@ int SlotMachine::display(int bet){
     //screen areas of each shape
     int a0 = reel[0]->screenArea();
     int a1 = reel[1]->screenArea();
-    int a2 = reel[2]->screenArea();
-
-    //add a print statement with the names and dimensions of each shape!
-    
+    int a2 = reel[2]->screenArea();    
 
     if (((n0==n1)|| (n0==n2) ||(n1==n2)) && ((a0==a1)|| (a0==a2) ||(a1==a2)) ) { //case 3X bet
         cout << "Jackpot! 2 Similar Shapes AND 2 Equal Screen Areas\n";
@@ -182,28 +171,28 @@ int SlotMachine::display(int bet){
 
 
 
-void SlotMachine::run(){
+void SlotMachine::run(int t){
     srand(time(NULL)); //calls this once to seed the random number generator
-    welcome();
-    t = 10;  //not currently necessary, but here as reminder to modify if user chooses a different number
+    welcome(t);
 
     while (t>0){ //step 4
-        int bet{prompt()}; //step 5
+        int bet{prompt(t)}; //step 5
             if (bet==0){
-                cout << "Thanks for playing, come back soon! \n";
-                cout << "Be sure you cash your remaining " << t << " tokens at the bar! \n"; 
-                cout << "Game over." << endl;
                 break; //quit the game if player bets 0
             }
         make_shapes(); //steps 6-19
         printReel(); //step 20
-        //step 21 compute token win or loss
         int result = display(bet); //this line covers steps 21 and 23 (the order makes no difference in game play. the player just sees the bet result before the current tokesn are updated)
         t +=result; //step 22 update current tokens
         cout << "You currently have " << t << " tokens" << endl;
-        //display message (call function display()) oops, implemented differently, maybe need to change this!
     }
-    cout << "You just ran out of tokens. Better luck next time! \n";
-    cout << "Game Over." << endl;
 
+    if (t ==0 ) { //when player loses
+    cout << "You just ran out of tokens. Better luck next time! \n";
+    }
+    else { //when player quits still having tokens left
+        cout << "Thanks for playing, come back soon! \n";
+        cout << "Be sure you cash your remaining " << t << " tokens at the bar! \n"; 
+    }
+    cout << "Game Over" << endl;
 }
