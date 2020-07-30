@@ -2,7 +2,7 @@
 
 #include "SlotMachine.h"
 
-//copied from assignment. This is the driver of slot machine. Should not need to modify!
+//copied from assignment instructions
 int main() {
 SlotMachine slot_machine; // create a slot machine object
 slot_machine.run(); // run our slot machine until the player decides

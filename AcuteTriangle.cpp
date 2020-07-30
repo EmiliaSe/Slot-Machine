@@ -1,4 +1,4 @@
-//Emilia Segura
+//Emilia Segura, 40138440
 
 #include <string>
 #include <cmath>
@@ -14,7 +14,7 @@ using std::vector;
 
 //constructor
 AcuteTriangle::AcuteTriangle(int b, const string& name, const string& description)
-        : Triangle(b%2==1 ? b : b+1 , b%2==1 ? ((b+1)/2) :((b+2)/2) , name, description){ //parity condition is inside constructor of parent
+        : Triangle(b%2==1 ? b : b+1 , b%2==1 ? ((b+1)/2) :((b+2)/2) , name, description){ //parity condition is inside constructor of parent. Makes an even base odd
 }
 
 double AcuteTriangle::perimeter() const{

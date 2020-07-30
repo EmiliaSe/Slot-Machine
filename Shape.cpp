@@ -1,7 +1,7 @@
 //Emilia Segura, 40138440
 
 #include <string>
-#include<iostream>
+#include <iostream>
 #include <sstream>
 #include <iomanip>
 #include <typeinfo>
@@ -17,9 +17,7 @@ int Shape::counter{0};
 //constructor
 Shape::Shape(const std::string& name, const std::string& description) 
     : name{name}, description{description}, id{++counter}{ //using a static counter variable to increment ids
-//std::cout << "A Shape has been created" << std::endl; //for testing
 }
-
 
 
 int Shape::getId() const{
@@ -59,11 +57,13 @@ string Shape::toString() const{
    return s.str(); //return the string stream as a single string
 }
 
-  ostream& operator<< (ostream& out, const Shape& shape){
+//to output string representation
+ostream& operator<< (ostream& out, const Shape& shape){
       out << shape.toString();
       return out;
-  }
+}
 
+//to output the drawing of any shape 
 ostream& operator<< (ostream& out, const Grid& g){
     for ( const auto &row : g ){ //for each row
         for ( const auto &c : row ) { //for each char in the row

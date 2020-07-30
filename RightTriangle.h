@@ -3,13 +3,12 @@
 #ifndef RIGHTTRIANGLE_H
 #define RIGHTTRIANGLE_H
 
-#include "Shape.h" //is this needed?
+#include "Shape.h" 
 #include "Triangle.h"
 
 class RightTriangle: public Triangle{
 
 private:
-
 
 
 public:
@@ -21,8 +20,6 @@ public:
     int screenPerimeter() const;
 
     Grid draw(char fChar = '*', char bChar = ' ') const;
-
-
 
 };
 

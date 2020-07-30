@@ -12,7 +12,7 @@ using std::string;
 using std::vector;
 
 //constructor
-RightTriangle::RightTriangle(int b, const string& name, const string& description): Triangle{b,b,name, description}{
+RightTriangle::RightTriangle(int b, const string& name, const string& description): Triangle{b,b,name, description}{ //base is same as height from right triangle
 
 }
 

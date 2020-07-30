@@ -8,7 +8,7 @@
 class Rhombus: public Shape{
 
 private:
-    int d; 
+    int d; //diagonal
 
 public:
 

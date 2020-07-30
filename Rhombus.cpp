@@ -56,16 +56,16 @@ Grid Rhombus::draw(char fChar, char bChar) const{
         }
         temp.push_back(row); //add row to vector
     }
-   int h = d/2;
-   for (int i=h; i >=1; --i){  //outer loop for bottom half
+    --height; //to not get middle row twice
+   for (int i=height; i >=1; --i){  //outer loop for bottom half
         vector<char> row;
-        for (int j=i; j<=h; j++){
+        for (int j=i; j<=height; j++){
             row.push_back(bChar); //left background
         }
         for (int k=1; k<=(2*i-1);k++){
             row.push_back(fChar); //foreground in middle
         }
-        for (int l=i; l<=h; l++){
+        for (int l=i; l<=height; l++){
             row.push_back(bChar); //right background
         }
         temp.push_back(row); 

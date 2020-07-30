@@ -18,7 +18,6 @@ using std::endl;
 using std::cin;
 
 
-
 void SlotMachine::welcome(int t){ //function to display welcome message an initial number of tokens at the start of game
     cout << "Welcome to 3-Reel Lucky Slot Machine Game!\n";
     cout << "Each reel will randomly display one of four shapes, each in 25 sizes.\n";
@@ -57,7 +56,7 @@ void SlotMachine::make_shapes(){
 void SlotMachine::make_shape(int k){
     
     int n = generateRandom(0,3); //generate random n between 0 and 3
-    int w = generateRandom(1,25); //genereate random w between 1 and 25
+    int w = generateRandom(1,25); //generate random w between 1 and 25
 
     switch (n){
         case 0: //rhombus
@@ -121,7 +120,7 @@ void SlotMachine::printReel(){  //function to display the three shapes side by s
     cout << "(" <<reel[2]->getName() <<", " << h2 <<", "<< w2 <<")"<<endl;
 }
 
-void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid& box){ //helper for printReel. goes through a row of the grid
+void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid& box){ //helper for printReel. goes through a row of the grid and outputs chars
     for (int j=0; j<w; ++j){
             if (i<h){
             cout << box[i][j];
@@ -133,7 +132,7 @@ void SlotMachine::printRow(const int& i, const int& h, const int& w, const Grid&
 }
 
 int SlotMachine::display(int bet){ //calculates win or loss on a bet and displays appropriate message to user (steps 21 and 23) Returns number of tokents won (negative if loss)
-    //names of each shape
+    //names of each shape  (using names to compare shapes as all shapes were created with their default name)
     std::string n0= reel[0]->getName();
     std::string n1= reel[1]->getName();
     std::string n2= reel[2]->getName();
@@ -170,10 +169,9 @@ int SlotMachine::display(int bet){ //calculates win or loss on a bet and display
 }
 
 
-
 void SlotMachine::run(int t){
     srand(time(NULL)); //calls this once to seed the random number generator
-    welcome(t);
+    welcome(t); //display initial message
 
     while (t>0){ //step 4
         int bet{prompt(t)}; //step 5
@@ -194,5 +192,5 @@ void SlotMachine::run(int t){
         cout << "Thanks for playing, come back soon! \n";
         cout << "Be sure you cash your remaining " << t << " tokens at the bar! \n"; 
     }
-    cout << "Game Over" << endl;
+    cout << "Game Over" << endl; //always prints game over
 }
